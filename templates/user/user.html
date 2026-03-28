@@ -1,0 +1,81 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="py-5" style="background-color:#fdfdfd ;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-12">
+
+                <div class="bg-white p-5  rounded-4 shadow">
+
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold text-black">Profile</h2>
+                        <p class="fw-bold text-bold text-black">
+                            Manage and review your personal information.
+                        </p>
+                    </div>
+
+                    <form action="" method="POST">
+                        {% csrf_token %}
+
+                        <!-- First Name -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-black">First Name</label>
+                            <input type="text" name="f_name"
+                                   class="form-control fw-bold"
+                                   placeholder="Enter Your First Name" value="{{request.user.first_name}}" required>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-black">Last Name</label>
+                            <input type="text" name="l_name"
+                                   class="form-control fw-bold"
+                                   placeholder="Enter Your Last Name"  value="{{request.user.last_name}}" required>
+                        </div>
+
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-black">Username</label>
+                            <input type="text" name="username"
+                                   class="form-control fw-bold"
+                                   placeholder="Enter Your Username" value="{{request.user.username}}" required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-black">Email Address</label>
+                            <input type="email" name="email"
+                                   class="form-control fw-bold"
+                                   placeholder="Enter Your Email" value="{{request.user.email}}" required>
+                        </div>
+
+                        <!-- Contact Number -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-black">Contact Number</label>
+                            <input type="tel" name="contact"
+                                   class="form-control fw-bold"
+                                   placeholder="Enter Your Contact Number" value="{{profile.contact}}" required>
+                        </div>
+
+                        <div class="text-center">
+                            <a href="/user/edit_profile"
+                               class="btn fw-bold px-4 py-2 rounded-3"
+                               style="background:#000; color:#fff;">
+                                Edit Profile
+                            </a>
+                        </div>
+
+
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

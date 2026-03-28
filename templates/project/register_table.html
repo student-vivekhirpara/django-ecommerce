@@ -1,0 +1,60 @@
+{% extends 'project/home.html' %}
+{% load static %}
+
+{% block content %}
+
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+
+                            <!-- Main-body start -->
+                                  
+                                 <!-- Hover table card start -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h2>Registration table</h2>
+                                            <div class="card-header-right">    
+                                                <ul class="list-unstyled card-option">        
+                                                    <li><i class="icofont icofont-simple-left "></i></li>        
+                                                    <li><i class="icofont icofont-maximize full-card"></i></li>        
+                                                    <li><i class="icofont icofont-minus minimize-card"></i></li>        
+                                                    <li><i class="icofont icofont-refresh reload-card"></i></li>        
+                                                    <li><i class="icofont icofont-error close-card"></i></li>    
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-block table-border-style">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>First Name</th>
+                                                            <th>Last name</th>
+                                                            <th>Usernname</th>
+                                                            <th>Email</th>
+                                                            <th>Contact</th>
+                                                        </tr>
+
+                                                    </thead>
+                                                   <tbody>
+
+                                                    {% for i in show %}
+                                                        <tr>
+                                                            <td>{{i.user.id}}</td>
+                                                            <td>{{i.user.first_name}}</td>
+                                                            <td>{{i.user.last_name}}</td>
+                                                            <td>{{i.user.username}}</td>
+                                                            <td>{{i.user.email}}</td>
+                                                            <td>{{i.contact}}</td>
+                                                        </tr>
+                                                    {% endfor %}
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                             </div>
+                             {% endblock %}

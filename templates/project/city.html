@@ -1,0 +1,72 @@
+{% extends 'project/home.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <!-- Card Start -->
+        <div class="card">
+
+            <div class="card-header">
+                <h2>Add New City</h2>
+            </div>
+
+            <div class="card-block">
+                <h4 class="sub-title">City</h4>
+
+                <form method="POST" action="/project/city_store">
+                    {% csrf_token %}
+
+                    <!-- City Name -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            City Name
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text"
+                                   name="city_name"
+                                   class="form-control"
+                                   placeholder="Enter City Name">
+                        </div>
+                    </div>
+
+                    <!-- State Dropdown -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            State
+                        </label>
+                        <div class="col-sm-10">
+                            <select name="state" class="form-control">
+                                <option value="">-- Select State --</option>
+
+                                {% for i in state %}
+                                <option value="{{ i.id }}">
+                                    {{ i.state }}
+                                </option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group row">
+                        <div class="col-sm-10 offset-sm-2 text-center">
+                            <button type="submit" class="btn btn-primary">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div> <!-- card-block -->
+
+        </div> <!-- card -->
+        
+    </div> <!-- pcoded-inner-content -->
+</div> <!-- pcoded-content -->
+
+{% endblock %}

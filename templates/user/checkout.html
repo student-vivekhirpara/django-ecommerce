@@ -1,0 +1,187 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="checkout spad">
+    <div class="container">
+        <div class="checkout__form">
+
+            <form method="POST" action="/user/place_order">
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <!-- LEFT SIDE -->
+                    <div class="col-lg-8 col-md-6">
+
+                        <!-- ================= BILLING DETAILS ================= -->
+                        <h4 class="checkout__title mb-4">Billing Details</h4>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input mb-3">
+                                    <p>First Name <span>*</span></p>
+                                    <input type="text" name="billing_first_name" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="checkout__input mb-3">
+                                    <p>Last Name <span>*</span></p>
+                                    <input type="text" name="billing_last_name" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkout__input mb-3">
+                            <p>Full Address<span>*</span></p>
+                            <input type="text" name="billing_address" class="form-control" required>
+                        </div>
+
+                        <div class="checkout__input mb-3">
+                            <p>City <span>*</span></p>
+                            <input type="text" name="billing_city" class="form-control" placeholder="City"  required>
+                        </div>
+
+                        <div class="checkout__input mb-3">
+                            <p>State <span>*</span></p>
+                            <input type="text" name="billing_state" class="form-control" placeholder="State" required>
+                        </div>
+
+                        <div class="checkout__input mb-3">
+                            <p>Pincode <span>*</span></p>
+                            <input type="number" name="billing_pincode" class="form-control" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input mb-3">
+                                    <p>Phone <span>*</span></p>
+                                    <input type="tel" name="billing_contact" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="checkout__input mb-3">
+                                    <p>Email <span>*</span></p>
+                                    <input type="email" name="billing_email" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= SHIPPING DETAILS ================= -->
+                        <h4 class="checkout__title mt-5 mb-4">Shipping Details</h4>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input mb-3">
+                                    <p>First Name <span>*</span></p>
+                                    <input type="text" name="shipping_first_name" class="form-control" placeholder="First Name"  required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="checkout__input mb-3">
+                                    <p>Last Name <span>*</span></p>
+                                    <input type="text" name="shipping_last_name" class="form-control" placeholder="Last Name"  required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkout__input mb-3">
+                            <p>Address <span>*</span></p>
+                            <input type="text" name="shipping_address" class="form-control" placeholder="Address"  required>
+                        </div>
+
+                        <div class="checkout__input mb-3">
+                            <p>City <span>*</span></p>
+                            <input type="text" name="shipping_city" class="form-control" placeholder="City"  required>
+                        </div>
+
+                        <div class="checkout__input mb-3">
+                            <p>State <span>*</span></p>
+                            <input type="text" name="shipping_state" class="form-control" placeholder="State" required>
+                        </div>
+
+                        <div class="checkout__input mb-3">
+                            <p>Pincode <span>*</span></p>
+                            <input type="number" name="shipping_pincode" class="form-control" placeholder="Pincode" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input mb-3">
+                                    <p>Phone <span>*</span></p>
+                                    <input type="tel" name="shipping_contact" class="form-control" placeholder="Contact" required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="checkout__input mb-3">
+                                    <p>Email <span>*</span></p>
+                                    <input type="email" name="shipping_email" class="form-control" placeholder="Email" required>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- LEFT SIDE CLOSE -->
+
+                    <!-- ================= RIGHT SIDE ================= -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="checkout__order">
+
+                            <h4 class="order__title mb-3">Your Order</h4>
+
+                            <div class="checkout__order__products d-flex justify-content-between mb-2">
+                                <span>Product</span>
+                                <span>Qty</span>
+                                <span>Total</span>
+                            </div>
+
+                            <ul class="checkout__total__products">
+                                {% for i in cart %}
+                                <li class="d-flex justify-content-between mb-2">
+                                    <span>{{ i.product.product }}</span>
+                                    <span>{{ i.quantity }}</span>
+                                    <span>₹ {{ i.price }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+
+                            <ul class="checkout__total__all mt-3">
+                                <li>Subtotal <span>₹ {{ total_amount }}</span></li>
+                                <li><strong>Total</strong> <span><strong>₹ {{ total_amount }}</strong></span></li>
+                            </ul>
+
+                            <div class="checkout__input__checkbox mt-3">
+                                <label>
+                                    <input type="radio" name="payment_method" value="cod" required>
+                                    Cash On Delivery
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
+                            <div class="checkout__input__checkbox">
+                                <label>
+                                    <input type="radio" name="payment_method" value="online">
+                                    Online Payment
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-dark w-100 mt-4">
+                                PLACE ORDER
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

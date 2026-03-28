@@ -1,0 +1,41 @@
+{% extends 'project/home.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+    <div class="card-block">
+    <h4 class="sub-title">Edit Category</h4>
+    <form class="forms-sample" method="POST" action="/project/category_update/{{ cate.id }}">
+          {% csrf_token %}
+
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Category Name</label>
+            <div class="col-sm-10">
+                <input type="text" name="category_name" value="{{cate.name}}" class="form-control"placeholder="Enter Category Name">
+            </div>
+        </div>
+
+        <!-- Button -->
+    <div class="form-group row">
+                        <div class="col-sm-10 offset-sm-2 text-center">
+                            <button type="submit" class="btn btn-primary">
+                                Add Category
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div> <!-- card-block -->
+
+        </div> <!-- card -->
+
+    </div> <!-- pcoded-inner-content -->
+</div> <!-- pcoded-content -->
+
+{% endblock %}
+         <!-- Basic Form Inputs card end -->

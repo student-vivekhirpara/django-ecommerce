@@ -1,0 +1,64 @@
+{% extends 'project/home.html' %}
+{% load static %}
+
+{% block content %}
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+
+                            <!-- Main-body start -->
+                                  
+                                 <!-- Hover table card start -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h2>City</h2>
+                                            <div class="card-header-right">    
+                                                <ul class="list-unstyled card-option">        
+                                                    <li><i class="icofont icofont-simple-left "></i></li>        
+                                                    <li><i class="icofont icofont-maximize full-card"></i></li>        
+                                                    <li><i class="icofont icofont-minus minimize-card"></i></li>        
+                                                    <li><i class="icofont icofont-refresh reload-card"></i></li>        
+                                                    <li><i class="icofont icofont-error close-card"></i></li>    
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-block table-border-style">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>city</th>
+                                                            <th>state</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                   <tbody>
+                                                        <tr>
+                                                        {% for i in ct %}
+
+                                                            <td>{{i.id}}</td>
+                                                            <td>{{i.city}}</td>
+                                                            <td>{{ i.state.state }}</td>
+
+                                                            <td>
+                                                                <a href="/project/city_edite/{{i.id}}" class="btn btn-sm btn-info">
+                                                                    <i class="ti-pencil"></i> Edit
+                                                                </a>
+                                                                <a href="/project/city_delete/{{i.id}}" class="btn btn-sm btn-danger"
+                                                                   onclick="return confirm('Are you sure you want to delete?');">
+                                                                    <i class="ti-trash"></i> Delete
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+
+                                                       
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </div>      
+                                 {% endblock %}
+                                    <!-- Hover table card end -->

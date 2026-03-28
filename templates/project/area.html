@@ -1,0 +1,64 @@
+{% extends 'project/home.html' %}
+{% load static %}
+
+{% block content %}
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+<div class="card">
+    <div class="card-header">
+        <h2>Add New Area</h2>
+    </div>
+
+    <div class="card-block">
+        <h4 class="sub-title">Area</h4>
+
+        <form class="forms-sample" method="POST" action="/project/area_store">
+            {% csrf_token %}
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Area Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="area_name" class="form-control" placeholder="Enter Area Name">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">State</label>
+                <div class="col-sm-10">
+                    <select name="state" class="form-control">
+                        <option value="">-- Select State --</option>
+                        {% for i in state %}
+                        <option value="{{ i.id }}">{{ i.state }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">City</label>
+                <div class="col-sm-10">
+                    <select name="city" class="form-control">
+                        <option value="">-- Select City --</option>
+                        {% for i in city %}
+                        <option value="{{ i.id }}">{{ i.city }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2 text-center">
+                    <button type="submit" class="btn btn-primary">
+                        Add
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div> <!-- card-block -->
+</div> <!-- card -->
+</div>
+</div>
+
+
+{% endblock %}

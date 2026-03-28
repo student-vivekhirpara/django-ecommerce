@@ -1,0 +1,92 @@
+{% extends 'project/home.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header">
+                                    <h2>Update City</h2>
+                                </div>
+
+                                <div class="card-block">
+                                    <h4 class="sub-title">City</h4>
+
+                                    <form method="POST"
+                                          action="/project/city_update/{{ city.id }}">
+                                        {% csrf_token %}
+
+                                        <!-- City Name -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">
+                                                City Name
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text"
+                                                       name="city_name"
+                                                       value="{{ city.city }}"
+                                                       class="form-control"
+                                                       placeholder="Enter City Name">
+                                            </div>
+                                        </div>
+
+                                        <!-- State Dropdown -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">
+                                                State
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <select name="state"
+                                                        class="form-control">
+                                                    <option value="">
+                                                        -- Select State --
+                                                    </option>
+
+                                                    {% for i in sat %}
+                                                        <option value="{{ i.id }}"
+                                                            {% if i.id == city.state_id %} selected {% endif %}>
+                                                            {{ i.state }}
+                                                        </option>
+                                                    {% endfor %}
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Submit Button -->
+                                        <div class="form-group row">
+                                            <div class="col-sm-10 offset-sm-2 text-center">
+                                                <button type="submit"
+                                                        class="btn btn-primary">
+                                                    Update
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div> <!-- card-block -->
+
+                            </div> <!-- card -->
+
+                        </div> <!-- col-sm-12 -->
+                    </div> <!-- row -->
+                </div> <!-- page-body -->
+
+            </div> <!-- page-wrapper -->
+        </div> <!-- main-body -->
+
+    </div> <!-- pcoded-inner-content -->
+</div> <!-- pcoded-content -->
+
+{% endblock %}

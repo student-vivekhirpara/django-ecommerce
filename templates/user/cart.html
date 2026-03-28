@@ -1,0 +1,153 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="shopping-cart spad" style="background:#f8f9fa;">
+    <div class="container py-5">
+        <div class="row">
+
+            <!-- LEFT SIDE -->
+            <div class="col-lg-8">
+
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+
+                        <h4 class="mb-4 fw-bold">Shopping Cart</h4>
+
+                <table class="table align-middle">
+                            <thead class="border-bottom">
+                                <tr class="text-muted">
+                                    <th>Product</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-end">Remove</th>
+                                    <th class="text-end">Price</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+
+                        <tbody>
+
+                            {% for i in cart %}
+                            <tr class="border-bottom">
+
+                                <!-- PRODUCT -->
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="/media/images/{{i.product.image}}"
+                                            style="width:70px; height:70px; object-fit:cover; border-radius:10px;">
+                                        <div class="ms-3">
+                                            <h6 class="mb-1 fw-semibold">
+                                                {{ i.product.product }}
+                                            </h6>
+                                            <small class="text-muted">
+                                                    In stock
+                                            </small>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- QUANTITY -->
+                                <td class="text-center">
+                                    <form method="POST" action="/user/update_cart/{{ i.id }}/">
+                                        {% csrf_token %}
+                                        <div class="d-flex justify-content-center align-items-center">
+
+                                            <button type="submit"name="action"value="minus"class="btn btn-sm btn-outline-dark">-
+                                            </button>
+
+                                            <span class="mx-3 fw-semibold">
+                                                {{ i.quantity }}
+                                            </span>
+
+                                            <button type="submit"name="action" value="plus"class="btn btn-sm btn-outline-dark">+
+                                            </button>
+
+                                        </div>
+                                    </form>
+                                </td>
+
+                                <td class="text-end">
+                                    <a href="/user/cart_delete/{{ i.id }}/"class="btn btn-sm btn-dark ">Remove
+                                    </a>
+                                </td>
+
+                                <!-- PRICE -->
+                                <td class="text-end fw-medium">
+                                    ₹ {{ i.price }}
+                                </td>
+
+                                <!-- TOTAL -->
+                                <td class="text-end fw-bold">
+                                     ₹ {{ i.item_total }}
+                                </td>
+
+                            </tr>
+
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center py-4 text-muted">
+                                    Your cart is empty 
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                        <!-- BUTTONS -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="/user/product"
+                               class="btn btn-outline-secondary px-4">
+                                Continue Shopping
+                            </a>
+
+                            <button class="btn btn-dark px-4">
+                                Update Cart
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="col-lg-4">
+
+                <div class="card shadow border-0">
+                    <div class="card-body p-4">
+                        
+                        <h5 class="fw-bold mb-4">Order Summary</h5>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Subtotal</span>
+                            <span>{{ total_amount }}</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Shipping</span>
+                            <span>Free</span>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between mb-4">
+                            <strong>Total</strong>
+                            <strong>{{ total_amount }}</strong>
+                        </div>
+
+                        <a href="/user/product_checkout"
+                           class="btn btn-dark w-100 py-2">
+                            Proceed to Checkout
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

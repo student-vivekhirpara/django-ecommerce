@@ -1,0 +1,75 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="shop spad">
+    <div class="container">
+
+        <h3 class="mb-4">My Orders</h3>
+
+        {% for i in order %}
+
+        <div class="card mb-4 shadow-sm">
+
+            <div class="card-header d-flex justify-content-between">
+                <div>
+                    <strong>Order ID :</strong> {{ i.id }}
+                </div>
+
+                <div>
+                    <strong>Date :</strong> {{ i.date }}
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-bordered">
+
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th width="120">Quantity</th>
+                            <th width="150">Price</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for item in order_details %}
+                            {% if item.order == i %}
+
+                                <tr>
+                                    <td>{{ item.product.product }}</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>₹ {{ item.price }}</td>
+                                </tr>
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+                <div class="text-end mt-3">
+                    <h5>Total : ₹ {{ i.amount }}</h5>
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="text-center p-5">
+            <h4>No Orders Yet</h4>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}

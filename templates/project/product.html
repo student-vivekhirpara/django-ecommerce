@@ -1,0 +1,185 @@
+{% extends 'project/home.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <!-- Main-body start -->
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <!-- Page body start -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <!-- Basic Form Inputs card start -->
+                            <div class="card">
+
+                                <div class="card-header">
+                                    <h2>Product</h2>
+
+                                    <div class="card-header-right">
+                                        <i class="icofont icofont-spinner-alt-5"></i>
+                                    </div>
+
+                                    <div class="card-header-right">
+                                        <i class="icofont icofont-spinner-alt-5"></i>
+                                    </div>
+                                </div>
+
+                                <div class="card-block">
+                                    <h4 class="sub-title">Product</h4>
+
+                                    <form class="forms-sample"
+                                          method="POST"
+                                          action="/project/product_store"
+                                          enctype="multipart/form-data">
+                                        {% csrf_token %}
+
+                                        <!-- Product Name -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Product Name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text"
+                                                       name="product_name"
+                                                       class="form-control"
+                                                       placeholder="Enter Product Name">
+                                            </div>
+                                        </div>
+
+                                        <!-- Category  -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Category Name</label>
+                                            <div class="col-sm-10">
+                                                <select name="category_name" class="form-control">
+                                                    <option value="">-- Select Category --</option>
+                                                    {% for i in categories %}
+                                                    <option value="{{i.id}}">{{i.name}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Subcategory  -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Subcategory Name</label>
+                                            <div class="col-sm-10">
+                                                <select name="subcategory_name" class="form-control">
+                                                    <option value="">-- Select Subcategory --</option>
+                                                    {% for i in subcategories %}
+                                                    <option value="{{i.id}}">{{i.subcategory}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Price  -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Price</label>
+                                            <div class="col-sm-10">
+                                                <input type="number"
+                                                       name="price"
+                                                       class="form-control"
+                                                       placeholder="Enter Product Price"
+                                                       step="0.01">
+                                            </div>
+                                        </div>
+
+                                        <!-- Quantity -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Quantity</label>
+                                            <div class="col-sm-10">
+                                                <input type="number"
+                                                       name="quantity"
+                                                       class="form-control"
+                                                       placeholder="Enter Product Quantity"
+                                                       min="1"
+                                                       step="1">
+                                            </div>
+                                        </div>
+
+                                        <!-- Small Description -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Small Description</label>
+                                            <div class="col-sm-10">
+                                                <textarea name="small_description"
+                                                          class="form-control"
+                                                          rows="4"
+                                                          placeholder="Enter  
+                                  Product Description"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Large Description -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Large Description</label>
+                                            <div class="col-sm-10">
+                                                <textarea name="large_description"
+                                                          class="form-control"
+                                                          rows="4"
+                                                          placeholder="Enter  
+                                  Product Description"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Product Image -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Product Image</label>
+
+                                            <div class="col-sm-5">
+                                                <input type="file"
+                                                       name="product_img"
+                                                       class="form-control"
+                                                       accept="image/*">
+                                            </div>
+
+                                            <div class="col-sm-5">
+                                                <img src="/media/images/"
+                                                     style="width:120px; height:150px; border:1px solid #ccc;">
+                                            </div>
+                                        </div>
+
+                                        <!-- Active -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label"></label>
+                                            <div class="col-sm-10">
+                                                <div class="form-check">
+                                                    <input class="form-check-input"
+                                                           type="checkbox"
+                                                           name="is_active"
+                                                           checked>
+                                                    <label class="form-check-label">Active</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Button -->
+                                        <div class="form-group row">
+                                            <div class="col-sm-10 offset-sm-2 text-center">
+                                                <button type="submit"
+                                                        class="btn btn-primary">
+                                                    Add
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div> <!-- card-block -->
+
+                            </div> <!-- card -->
+                            <!-- Basic Form Inputs card end -->
+
+                        </div> <!-- col-sm-12 -->
+                    </div> <!-- row -->
+                </div> <!-- page-body -->
+
+            </div> <!-- page-wrapper -->
+        </div> <!-- main-body -->
+
+    </div> <!-- pcoded-inner-content -->
+</div> <!-- pcoded-content -->
+
+{% endblock %}
